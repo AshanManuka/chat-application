@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="chatContext" prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.application.controller.ChatFormController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="450.0" opacity="0.6" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/bg2.jpg" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="chatBox" layoutX="23.0" layoutY="48.0" prefHeight="493.0" prefWidth="402.0">
+         <font>
+            <Font name="Arial Bold" size="15.0" />
+         </font>
+      </TextArea>
+      <Label fx:id="boxNameLbl" layoutX="80.0" layoutY="10.0" prefHeight="29.0" prefWidth="122.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Text fill="#83112d" layoutX="37.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello, ">
+         <font>
+            <Font name="System Bold Italic" size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="typeField" layoutX="23.0" layoutY="556.0" prefHeight="29.0" prefWidth="341.0" promptText="Message">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <JFXButton layoutX="367.0" layoutY="557.0" prefHeight="30.0" prefWidth="59.0" style="-fx-background-color: darkslategrey" text="Send" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <ImageView fx:id="galleryId" fitHeight="25.0" fitWidth="25.0" layoutX="332.0" layoutY="558.0" onMouseClicked="#galleryAction" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/camera%20(2).png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
