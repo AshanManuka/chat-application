@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.application.controller.MainFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="mainContext" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.application.controller.MainFormController">
+   <children>
+      <ImageView fitHeight="500.0" fitWidth="500.0" pickOnBounds="true">
+         <image>
+            <Image url="@../assets/50426.jpg" />
+         </image></ImageView>
+      <Text fill="#0b125e" layoutX="47.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="welcome, ">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <Circle fill="#a0b9d0" layoutX="255.0" layoutY="209.0" radius="65.0" stroke="BLACK" strokeType="INSIDE" />
+      <JFXButton fx:id="loginBtn" layoutX="374.0" layoutY="355.0" onAction="#loginAction" prefHeight="37.0" prefWidth="96.0" style="-fx-background-color: #101e33;" text="Log In" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </JFXButton>
+      
+      <TextField fx:id="userName" layoutX="142.0" layoutY="352.0" prefHeight="33.0" prefWidth="213.0" promptText="User Name">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </TextField>
+   </children>
 </AnchorPane>
