@@ -23,16 +23,18 @@ public class ServerClass implements Initializable {
     Socket accept;
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
+    public static int newPort;
 
     String name = " ";
     String message = " ";
+    String reply = " ";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         new Thread(() -> {
             try {
                 serverSocket = new ServerSocket(PORT);
-               System.out.println("server start....");
+                System.out.println("server start....");
                 accept = serverSocket.accept();
                 System.out.println("Client connected............");
 
@@ -42,15 +44,21 @@ public class ServerClass implements Initializable {
                 while (!message.equals("exit")){
                     message = dataInputStream.readUTF();
                     System.out.println("client :  "+message);
+                    reply = message;
+
+
                 }
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }).start();
-
-
     }
+
+   /* public int portMaker(int P){
+
+        return 0;
+    }*/
 
     public void startAction(ActionEvent actionEvent) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("../view/mainForm.fxml"));
@@ -61,4 +69,5 @@ public class ServerClass implements Initializable {
         Stage stage2 = (Stage) startBtn.getScene().getWindow();
         stage2.close();
     }
+
 }

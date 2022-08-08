@@ -27,8 +27,10 @@ public class ChatFormController implements Initializable {
     public ImageView galleryId;
     public JFXButton sendBtn;
     public static String chatName;
+    int PORT = 5000;
 
-    final int PORT = 5000;
+
+
     Socket socket;
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
@@ -44,14 +46,13 @@ public class ChatFormController implements Initializable {
         new Thread(() -> {
             try {
                 socket = new Socket("localhost", PORT);
-
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
-                while (!message.equals("exit")) {
-                    message = dataInputStream.readUTF();
-                    chatBox.appendText("\n Server : " + message);
-                }
+                /*while (!message.equals("exit")) {
+                    *//*message = dataInputStream.readUTF();
+                    chatBox.appendText("\n Server : " + message);*//*
+                }*/
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -59,6 +60,13 @@ public class ChatFormController implements Initializable {
         }).start();
 
     }
+
+    /*private int portMaker() {
+        int port = 5000;
+        port += 1;
+        return port;
+    }*/
+
 
     public void galleryAction(MouseEvent mouseEvent) {
         System.out.println("clicked camera");

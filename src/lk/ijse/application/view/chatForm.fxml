@@ -17,7 +17,7 @@
             <Image url="@../assets/bg1.jpg" />
          </image>
       </ImageView>
-      <TextArea fx:id="chatBox" layoutX="23.0" layoutY="48.0" prefHeight="493.0" prefWidth="402.0">
+      <TextArea fx:id="chatBox" editable="false" layoutX="23.0" layoutY="48.0" prefHeight="493.0" prefWidth="402.0">
          <font>
             <Font name="Arial Bold" size="15.0" />
          </font>
