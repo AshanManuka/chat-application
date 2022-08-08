@@ -46,6 +46,8 @@ public class ServerClass implements Initializable {
                     System.out.println("client :  "+message);
                     reply = message;
 
+                    dataOutputStream.writeUTF(reply);
+                    dataOutputStream.flush();
 
                 }
 

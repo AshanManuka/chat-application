@@ -37,6 +37,7 @@ public class ChatFormController implements Initializable {
 
     String name = " ";
     String message = " ";
+    String reply = " ";
 
 
     @Override
@@ -49,10 +50,11 @@ public class ChatFormController implements Initializable {
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
-                /*while (!message.equals("exit")) {
-                    *//*message = dataInputStream.readUTF();
-                    chatBox.appendText("\n Server : " + message);*//*
-                }*/
+                while (!message.equals("exit")) {
+                    reply = dataInputStream.readUTF();
+                    System.out.println("server :  "+reply);
+                    chatBox.appendText("\n "+"server :  "+reply);
+                }
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -78,7 +80,6 @@ public class ChatFormController implements Initializable {
 
     public void goMessage() throws IOException {
         dataOutputStream.writeUTF(typeField.getText().trim());
-        chatBox.appendText("\n "+boxNameLbl.getText()+" : "+  typeField.getText());
         dataOutputStream.flush();
         typeField.clear();
     }
