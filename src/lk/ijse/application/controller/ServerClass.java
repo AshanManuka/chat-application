@@ -22,7 +22,8 @@ public class ServerClass implements Initializable {
     Socket accept;
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
-    public static int newPort = 5000;
+    public static int newPort;
+    public static boolean select;
 
     String name = " ";
     String message = " ";
@@ -30,7 +31,10 @@ public class ServerClass implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        makeHost();
+       if (select){
+           makeHost();
+       }
+
 
     }
 
@@ -59,6 +63,9 @@ public class ServerClass implements Initializable {
                 e.printStackTrace();
             }
         }).start();
+        System.out.println(select);
+        select = false;
+        System.out.println(select);
     }
 
    /* public int portMaker(int P){

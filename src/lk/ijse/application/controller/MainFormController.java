@@ -33,8 +33,11 @@ public class MainFormController implements Initializable {
     }
 
     public void goChatPage() throws IOException {
+        /*Port is increment*/
         port = port+1;
-        System.out.println("first port : "+port);
+/*        System.out.println("making new client : "+port);*/
+        ServerClass.newPort = port;
+        ServerClass.select = true;
         ChatFormController.chatName = userName.getText();
         ChatFormController.PORT = port;
         userName.clear();

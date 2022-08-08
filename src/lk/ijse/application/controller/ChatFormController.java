@@ -64,7 +64,7 @@ public class ChatFormController implements Initializable {
         new Thread(() -> {
             try {
                 socket = new Socket("localhost", PORT);
-                System.out.println("client first port : "+ PORT);
+                System.out.println("making new client : "+ PORT);
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
