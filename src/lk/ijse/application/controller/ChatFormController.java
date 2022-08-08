@@ -27,9 +27,7 @@ public class ChatFormController implements Initializable {
     public ImageView galleryId;
     public JFXButton sendBtn;
     public static String chatName;
-    int PORT = 5000;
-
-
+    public static int PORT;
 
     Socket socket;
     DataInputStream dataInputStream;
@@ -43,8 +41,8 @@ public class ChatFormController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boxNameLbl.setText(chatName);
-
-        new Thread(() -> {
+        makeNewChat();
+        /*new Thread(() -> {
             try {
                 socket = new Socket("localhost", PORT);
                 dataInputStream = new DataInputStream(socket.getInputStream());
@@ -59,15 +57,28 @@ public class ChatFormController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }).start();
-
+        }).start();*/
     }
 
-    /*private int portMaker() {
-        int port = 5000;
-        port += 1;
-        return port;
-    }*/
+    private void makeNewChat() {
+        new Thread(() -> {
+            try {
+                socket = new Socket("localhost", PORT);
+                System.out.println("client first port : "+ PORT);
+                dataInputStream = new DataInputStream(socket.getInputStream());
+                dataOutputStream = new DataOutputStream(socket.getOutputStream());
+
+                while (!message.equals("exit")) {
+                    reply = dataInputStream.readUTF();
+                    System.out.println("server :  "+reply);
+                    chatBox.appendText("\n "+"server :  "+reply);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
 
 
     public void galleryAction(MouseEvent mouseEvent) {
@@ -82,6 +93,9 @@ public class ChatFormController implements Initializable {
         dataOutputStream.writeUTF(typeField.getText().trim());
         dataOutputStream.flush();
         typeField.clear();
+
+/*        PORT = PORT+1;
+        System.out.println("new port is : "+PORT);*/
     }
 
     public void enterEvent(KeyEvent keyEvent) throws IOException {

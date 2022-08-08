@@ -20,6 +20,7 @@ public class MainFormController implements Initializable {
     public AnchorPane mainContext;
     public JFXButton loginBtn;
     public TextField userName;
+    public int port = 4999;
 
 
     @Override
@@ -32,8 +33,12 @@ public class MainFormController implements Initializable {
     }
 
     public void goChatPage() throws IOException {
+        port = port+1;
+        System.out.println("first port : "+port);
         ChatFormController.chatName = userName.getText();
+        ChatFormController.PORT = port;
         userName.clear();
+
         Parent parent = FXMLLoader.load(getClass().getResource("../view/chatForm.fxml"));
         Stage stage1 = new Stage();
         stage1.setScene(new Scene(parent));

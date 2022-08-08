@@ -17,13 +17,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ServerClass implements Initializable {
-    final int PORT = 5000;
     public JFXButton startBtn;
     ServerSocket serverSocket;
     Socket accept;
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
-    public static int newPort;
+    public static int newPort = 5000;
 
     String name = " ";
     String message = " ";
@@ -31,9 +30,14 @@ public class ServerClass implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        makeHost();
+
+    }
+
+    private void makeHost() {
         new Thread(() -> {
             try {
-                serverSocket = new ServerSocket(PORT);
+                serverSocket = new ServerSocket(newPort);
                 System.out.println("server start....");
                 accept = serverSocket.accept();
                 System.out.println("Client connected............");
@@ -70,6 +74,10 @@ public class ServerClass implements Initializable {
 
         Stage stage2 = (Stage) startBtn.getScene().getWindow();
         stage2.close();
+
+        /* Make server port as 0*/
+        newPort = 0;
+
     }
 
 }
