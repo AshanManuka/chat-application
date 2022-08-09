@@ -12,7 +12,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,26 +24,23 @@ public class MainFormController implements Initializable {
     public AnchorPane mainContext;
     public JFXButton loginBtn;
     public TextField userName;
-    public int port = 4999;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userName.requestFocus();
-    }
+
+        }
+
+
 
     public void loginAction(ActionEvent actionEvent) throws IOException {
         goChatPage();
     }
 
     public void goChatPage() throws IOException {
-        /*Port is increment*/
-        port = port+1;
-/*        System.out.println("making new client : "+port);*/
-        ServerClass.newPort = port;
-        ServerClass.select = true;
+
         ChatFormController.chatName = userName.getText();
-        ChatFormController.PORT = port;
         userName.clear();
 
         Parent parent = FXMLLoader.load(getClass().getResource("../view/chatForm.fxml"));
