@@ -18,13 +18,49 @@ import java.util.ResourceBundle;
 
 public class ServerClass implements Initializable {
     public JFXButton startBtn;
+    ServerSocket serverSocket;
+    Socket socket;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    System.out.println("good morning");
+        try {
+            startServer();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
+
+    private void startServer() throws IOException {
+        serverSocket = new ServerSocket(5000);
+
+        try {
+            while(!serverSocket.isClosed()){
+
+                Socket socket = serverSocket.accept();
+                System.out.println("A new client connected");
+                ClientManager clientManager = new ClientManager(socket);
+
+                Thread thread = new Thread(clientManager);
+                thread.start();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void closeServerSocket() {
+        try {
+            if (serverSocket != null) {
+                serverSocket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
     public void startAction(ActionEvent actionEvent) throws IOException {
