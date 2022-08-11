@@ -8,12 +8,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ServerClass implements Initializable {
@@ -23,7 +25,8 @@ public class ServerClass implements Initializable {
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
 
-    String message="";
+    String message= "";
+    String reply = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,8 +38,14 @@ public class ServerClass implements Initializable {
                 socket = serverSocket.accept();
                 System.out.println("Client is connected...!");
 
-                dataInputStream = new DataInputStream(socket.getInputStream());
+                ClientManager clientManager = new ClientManager(socket);
+                Thread thread = new Thread(clientManager);
+
+                /*dataInputStream = new DataInputStream(socket.getInputStream());
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
+
+
+                System.out.println("socket after stream : "+socket);
 
                 while (socket.isConnected()) {
                     message = dataInputStream.readUTF();
@@ -45,12 +54,15 @@ public class ServerClass implements Initializable {
                     dataOutputStream.flush();
                 }
 
-
+                System.out.println("socket in try : "+socket);
+*/
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("socket in thred : "+socket);
         }).start();
 
+        System.out.println("socket in method : "+socket);
     }
 
 

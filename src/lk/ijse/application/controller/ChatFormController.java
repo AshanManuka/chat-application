@@ -47,10 +47,10 @@ public class ChatFormController implements Initializable {
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
-                while (socket.isConnected()) {
+               /* while (socket.isConnected()) {
                     message = dataInputStream.readUTF();
                     chatBox.appendText("\n"+chatName+" : "+message);
-                }
+                }*/
 
             } catch (IOException e) {
                 e.printStackTrace();
