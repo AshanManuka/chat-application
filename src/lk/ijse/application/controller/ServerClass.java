@@ -27,12 +27,6 @@ public class ServerClass implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            startServer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // from ishanka
 
         new Thread(() -> {
             try {
@@ -59,24 +53,6 @@ public class ServerClass implements Initializable {
 
     }
 
-    private void startServer() throws IOException {
-       // serverSocket = new ServerSocket(5000);
-
-        /*try {
-            while(!serverSocket.isClosed()){
-
-                Socket socket = serverSocket.accept();
-                System.out.println("A new client connected");
-                ClientManager clientManager = new ClientManager(socket);
-
-                Thread thread = new Thread(clientManager);
-                thread.start();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-
-    }
 
     public void closeServerSocket() {
         try {
