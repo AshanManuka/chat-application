@@ -20,7 +20,10 @@ public class ServerClass implements Initializable {
     public JFXButton startBtn;
     ServerSocket serverSocket;
     Socket socket;
+    DataInputStream dataInputStream;
+    DataOutputStream dataOutputStream;
 
+    String message="";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -29,13 +32,37 @@ public class ServerClass implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // from ishanka
+
+        new Thread(() -> {
+            try {
+                serverSocket = new ServerSocket(2000);
+                System.out.println("Server Started..");
+                socket = serverSocket.accept();
+                System.out.println("Client is connected...!");
+
+                dataInputStream = new DataInputStream(socket.getInputStream());
+                dataOutputStream = new DataOutputStream(socket.getOutputStream());
+
+                while (socket.isConnected()) {
+                    message = dataInputStream.readUTF();
+                    System.out.println("Client : " + message);
+                    dataOutputStream.writeUTF(message.trim());
+                    dataOutputStream.flush();
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
 
     }
 
     private void startServer() throws IOException {
-        serverSocket = new ServerSocket(5000);
+       // serverSocket = new ServerSocket(5000);
 
-        try {
+        /*try {
             while(!serverSocket.isClosed()){
 
                 Socket socket = serverSocket.accept();
@@ -47,7 +74,7 @@ public class ServerClass implements Initializable {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
