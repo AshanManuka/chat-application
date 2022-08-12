@@ -31,7 +31,7 @@ public class ServerClass implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        new Thread(() -> {
+        /*new Thread(() -> {
             try {
                 serverSocket = new ServerSocket(2000);
                 System.out.println("Server Started..");
@@ -41,7 +41,7 @@ public class ServerClass implements Initializable {
                 ClientHandler clientHandler = new ClientHandler(socket);
                 Thread thread = new Thread(clientHandler);
 
-                /*dataInputStream = new DataInputStream(socket.getInputStream());
+                *//*dataInputStream = new DataInputStream(socket.getInputStream());
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
 
@@ -51,8 +51,8 @@ public class ServerClass implements Initializable {
                     message = dataInputStream.readUTF();
                     System.out.println("Client : " + message);
                     dataOutputStream.writeUTF(message.trim());
-                    dataOutputStream.flush();*//*
-                }*/
+                    dataOutputStream.flush();*//**//*
+                }*//*
 
                 System.out.println("socket in try : "+socket);
             } catch (IOException e) {
@@ -60,7 +60,7 @@ public class ServerClass implements Initializable {
             }
           //  System.out.println("socket in thred : "+socket);
         }).start();
-
+*/
        // System.out.println("socket in method : "+socket);
     }
 

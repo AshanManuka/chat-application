@@ -24,12 +24,22 @@ public class MainFormController implements Initializable {
     public AnchorPane mainContext;
     public JFXButton loginBtn;
     public TextField userName;
+    ServerSocket serverSocket;
+    Socket socket;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         userName.requestFocus();
 
+        new Thread(() -> {
+            try {
+                serverSocket = new ServerSocket(2000);
+                System.out.println("Server Started..");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
         }
 
 
@@ -39,6 +49,24 @@ public class MainFormController implements Initializable {
     }
 
     public void goChatPage() throws IOException {
+
+        new Thread(() -> {
+            try {
+                socket = serverSocket.accept();
+                System.out.println("Client is connected...!");
+
+                ClientHandler clientHandler = new ClientHandler(socket);
+                Thread thread = new Thread(clientHandler);
+
+
+                System.out.println("socket in try : "+socket);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }).start();
+
 
         ChatFormController.chatName = userName.getText();
         userName.clear();
