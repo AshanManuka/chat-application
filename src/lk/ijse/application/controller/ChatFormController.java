@@ -34,7 +34,6 @@ public class ChatFormController implements Initializable {
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
 
-    String message = "";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -42,14 +41,17 @@ public class ChatFormController implements Initializable {
 
         new Thread(() -> {
             try {
-                socket = new Socket("localhost",PORT);
+                socket = new Socket("localhost",2000);
 
                 dataInputStream = new DataInputStream(socket.getInputStream());
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
                 while (socket.isConnected()) {
-                    message = dataInputStream.readUTF();
+                   String message = dataInputStream.readUTF();
+                    String msg = dataInputStream.readUTF();
+
                     chatBox.appendText("\n"+chatName+" : "+message);
+                    chatBox.appendText("\n"+chatName+" : "+msg);
                 }
 
             } catch (IOException e) {
@@ -69,6 +71,9 @@ public class ChatFormController implements Initializable {
     }
 
     public void goMessage() throws IOException {
+        dataOutputStream.writeUTF(boxNameLbl.getText().trim());
+        dataOutputStream.flush();
+
         dataOutputStream.writeUTF(typeField.getText().trim());
         dataOutputStream.flush();
         typeField.clear();

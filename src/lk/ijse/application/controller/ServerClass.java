@@ -38,7 +38,10 @@ public class ServerClass implements Initializable {
                 socket = serverSocket.accept();
                 System.out.println("Client is connected...!");
 
-                dataInputStream = new DataInputStream(socket.getInputStream());
+                ClientHandler clientHandler = new ClientHandler(socket);
+                Thread thread = new Thread(clientHandler);
+
+                /*dataInputStream = new DataInputStream(socket.getInputStream());
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
 
@@ -48,17 +51,17 @@ public class ServerClass implements Initializable {
                     message = dataInputStream.readUTF();
                     System.out.println("Client : " + message);
                     dataOutputStream.writeUTF(message.trim());
-                    dataOutputStream.flush();
-                }
+                    dataOutputStream.flush();*//*
+                }*/
 
                 System.out.println("socket in try : "+socket);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("socket in thred : "+socket);
+          //  System.out.println("socket in thred : "+socket);
         }).start();
 
-        System.out.println("socket in method : "+socket);
+       // System.out.println("socket in method : "+socket);
     }
 
 
