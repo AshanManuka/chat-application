@@ -13,18 +13,13 @@ public class ClientHandler implements Runnable {
     private String message;
 
     public ClientHandler(Socket socket) {
-        System.out.println("handler ekta awa");
         try {
-            System.out.println("handler eke try eke");
             this.socket = socket;
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.dataInputStream = new DataInputStream(socket.getInputStream());
-            this.clientName = dataInputStream.readUTF();
-            this.message = dataInputStream.readUTF();
+            this.clientName = MainFormController.name;
             clientHandlers.add(this);
-            /*String msg = dataInputStream.readUTF();
-            System.out.println("msg in the handler :  "+msg);*/
-            System.out.println("/    /");
+
             broadcastMessage(clientName+" is connected to the chat...!");
         } catch (IOException e) {
             closeAll(socket);
@@ -33,14 +28,11 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("In run method ");
-
         String messageFromClient;
 
         while (socket.isConnected()){
             try {
                 messageFromClient =dataInputStream.readUTF();
-                System.out.println("msg in the run method : "+messageFromClient);
                 broadcastMessage(messageFromClient);
             } catch (IOException e) {
                 closeAll(socket);
@@ -51,18 +43,12 @@ public class ClientHandler implements Runnable {
     }
 
     public void broadcastMessage(String message){
-        System.out.println("in broadcast message : "+message);
         serch();
         for (ClientHandler clientHandler : clientHandlers) {
             try {
-                System.out.println("in handler.broadcast.try & begin "+message);
-               // if (!clientHandler.clientName.equals(clientName)){
-                    System.out.println("name is equals");
                     String msg = clientHandler.message;
-                    clientHandler.dataOutputStream.writeUTF(message.trim());
-                    dataOutputStream.writeUTF(msg.trim());
+                    clientHandler.dataOutputStream.writeUTF(clientHandler.clientName+" : "+message+"\n");
                     clientHandler.dataOutputStream.flush();
-                //}
             } catch (IOException e) {
                 closeAll(socket);
             }
@@ -77,8 +63,6 @@ public class ClientHandler implements Runnable {
             System.out.println("client name is : "+name);
             String msg = clientHandler.message;
             System.out.println("client mesage is : "+msg);
-
-
         }
     }
 

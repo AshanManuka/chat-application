@@ -26,6 +26,7 @@ public class MainFormController implements Initializable {
     public TextField userName;
     ServerSocket serverSocket;
     Socket socket;
+    public static String name;
 
 
     @Override
@@ -49,24 +50,7 @@ public class MainFormController implements Initializable {
     }
 
     public void goChatPage() throws IOException {
-
-        new Thread(() -> {
-            try {
-                socket = serverSocket.accept();
-                System.out.println("Client is connected...!");
-
-                ClientHandler clientHandler = new ClientHandler(socket);
-                Thread thread = new Thread(clientHandler);
-
-
-                System.out.println("socket in try : "+socket);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        }).start();
-
+        name = userName.getText();
 
         ChatFormController.chatName = userName.getText();
         userName.clear();
@@ -75,6 +59,23 @@ public class MainFormController implements Initializable {
         Stage stage1 = new Stage();
         stage1.setScene(new Scene(parent));
         stage1.show();
+
+
+        new Thread(() -> {
+            try {
+                socket = serverSocket.accept();
+                System.out.println("Client is connected...!");
+
+                ClientHandler clientHandler = new ClientHandler(socket);
+                Thread thread = new Thread(clientHandler);
+                thread.start();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }).start();
     }
 
     public void enterEvent(KeyEvent keyEvent) throws IOException {

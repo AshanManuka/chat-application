@@ -27,9 +27,7 @@ public class ChatFormController implements Initializable {
     public ImageView galleryId;
     public JFXButton sendBtn;
     public static String chatName;
-    //public static String message;
 
-    final int PORT = 2000;
     Socket socket;
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
@@ -47,11 +45,8 @@ public class ChatFormController implements Initializable {
                 dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
                 while (socket.isConnected()) {
-                   String message = dataInputStream.readUTF();
-                    String msg = dataInputStream.readUTF();
-
+                    String message = dataInputStream.readUTF();
                     chatBox.appendText("\n"+chatName+" : "+message);
-                    chatBox.appendText("\n"+chatName+" : "+msg);
                 }
 
             } catch (IOException e) {
@@ -71,8 +66,9 @@ public class ChatFormController implements Initializable {
     }
 
     public void goMessage() throws IOException {
-        dataOutputStream.writeUTF(boxNameLbl.getText().trim());
-        dataOutputStream.flush();
+
+        dataInputStream = new DataInputStream(socket.getInputStream());
+        dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
         dataOutputStream.writeUTF(typeField.getText().trim());
         dataOutputStream.flush();
