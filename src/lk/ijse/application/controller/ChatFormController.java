@@ -71,7 +71,8 @@ public class ChatFormController implements Initializable {
         dataInputStream = new DataInputStream(socket.getInputStream());
         dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
-        dataOutputStream.writeUTF(typeField.getText().trim());
+        String sendThing = boxNameLbl.getText()+" : "+typeField.getText();
+        dataOutputStream.writeUTF(sendThing.trim());
         dataOutputStream.flush();
         typeField.clear();
 

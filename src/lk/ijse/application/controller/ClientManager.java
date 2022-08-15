@@ -47,7 +47,6 @@ public class ClientManager implements Runnable {
         search();
         for (ClientManager clientManager : clientManagers) {
             try {
-                    String msg = clientManager.message;
                     clientManager.dataOutputStream.writeUTF(message+"\n");
                     clientManager.dataOutputStream.flush();
             } catch (IOException e) {
