@@ -7,7 +7,6 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="chatContext" prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.application.controller.ChatFormController">
@@ -27,18 +26,17 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <JFXButton fx:id="sendBtn" layoutX="368.0" layoutY="556.0" onAction="#sendMessage" prefHeight="30.0" prefWidth="59.0" style="-fx-background-color: darkslategrey" text="Send" textFill="WHITE">
+      <JFXButton fx:id="sendBtn" layoutX="374.0" layoutY="556.0" onAction="#sendMessage" prefHeight="29.0" prefWidth="54.0" style="-fx-background-color: darkslategrey" text="Send" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="30.0" layoutX="24.0" layoutY="555.0" stroke="WHITE" strokeType="INSIDE" width="341.0" />
-      <TextField fx:id="typeField" layoutX="24.0" layoutY="555.0" onKeyReleased="#enterEvent" prefHeight="30.0" prefWidth="306.0" promptText="Message">
+      <TextField fx:id="typeField" layoutX="24.0" layoutY="555.0" onKeyReleased="#enterEvent" prefHeight="30.0" prefWidth="346.0" promptText="Message" style="-fx-border-radius: 60;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <ImageView fx:id="galleryId" fitHeight="25.0" fitWidth="25.0" layoutX="334.0" layoutY="557.0" onMouseClicked="#galleryAction" pickOnBounds="true">
+      <ImageView fx:id="galleryId" fitHeight="25.0" fitWidth="23.0" layoutX="340.0" layoutY="557.0" onMouseClicked="#galleryAction" pickOnBounds="true">
          <image>
             <Image url="@../assets/cam.png" />
          </image>

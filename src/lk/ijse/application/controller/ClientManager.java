@@ -4,21 +4,21 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class ClientHandler implements Runnable {
-    public static ArrayList<ClientHandler> clientHandlers = new ArrayList<>();
+public class ClientManager implements Runnable {
+    public static ArrayList<ClientManager> clientManagers = new ArrayList<>();
     private Socket socket;
     private DataInputStream dataInputStream;
     private DataOutputStream dataOutputStream;
     private String clientName;
     private String message;
 
-    public ClientHandler(Socket socket) {
+    public ClientManager(Socket socket) {
         try {
             this.socket = socket;
             this.dataOutputStream = new DataOutputStream(socket.getOutputStream());
             this.dataInputStream = new DataInputStream(socket.getInputStream());
             this.clientName = MainFormController.name;
-            clientHandlers.add(this);
+            clientManagers.add(this);
 
             broadcastMessage(clientName+" is connected to the chat...!");
         } catch (IOException e) {
@@ -33,6 +33,7 @@ public class ClientHandler implements Runnable {
         while (socket.isConnected()){
             try {
                 messageFromClient =dataInputStream.readUTF();
+                System.out.println("in run method : "+messageFromClient);
                 broadcastMessage(messageFromClient);
             } catch (IOException e) {
                 closeAll(socket);
@@ -43,31 +44,31 @@ public class ClientHandler implements Runnable {
     }
 
     public void broadcastMessage(String message){
-        serch();
-        for (ClientHandler clientHandler : clientHandlers) {
+        search();
+        for (ClientManager clientManager : clientManagers) {
             try {
-                    String msg = clientHandler.message;
-                    clientHandler.dataOutputStream.writeUTF(clientHandler.clientName+" : "+message+"\n");
-                    clientHandler.dataOutputStream.flush();
+                    String msg = clientManager.message;
+                    clientManager.dataOutputStream.writeUTF(message+"\n");
+                    clientManager.dataOutputStream.flush();
             } catch (IOException e) {
                 closeAll(socket);
             }
         }
     }
 
-    private void serch() {
-        for (ClientHandler clientHandler:clientHandlers) {
-            Socket s = clientHandler.socket;
+    private void search() {
+        for (ClientManager clientManager : clientManagers) {
+            Socket s = clientManager.socket;
             System.out.println("in for each : "+s);
-            String name = clientHandler.clientName;
+            String name = clientManager.clientName;
             System.out.println("client name is : "+name);
-            String msg = clientHandler.message;
+            String msg = clientManager.message;
             System.out.println("client mesage is : "+msg);
         }
     }
 
     public void removeClientHandler (){
-        clientHandlers.remove(this);
+        clientManagers.remove(this);
         broadcastMessage("SERVER: "+clientName+" has left from the chat");
     }
 

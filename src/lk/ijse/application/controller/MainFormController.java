@@ -12,8 +12,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -66,8 +64,8 @@ public class MainFormController implements Initializable {
                 socket = serverSocket.accept();
                 System.out.println("Client is connected...!");
 
-                ClientHandler clientHandler = new ClientHandler(socket);
-                Thread thread = new Thread(clientHandler);
+                ClientManager clientManager = new ClientManager(socket);
+                Thread thread = new Thread(clientManager);
                 thread.start();
 
             } catch (IOException e) {

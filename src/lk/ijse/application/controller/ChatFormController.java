@@ -46,7 +46,8 @@ public class ChatFormController implements Initializable {
 
                 while (socket.isConnected()) {
                     String message = dataInputStream.readUTF();
-                    chatBox.appendText("\n"+chatName+" : "+message);
+                    System.out.println("last message : "+message);
+                    chatBox.appendText("\n"+message);
                 }
 
             } catch (IOException e) {
